@@ -50,4 +50,24 @@ public final class Report {
     public List<String> getSections() {
         return sections;
     }
+
+    @Override
+    public String toString() {
+        return """
+            Report
+            Title: %s
+            Author: %s
+            Style: %s
+            Table of contents: %s
+            Footer: %s
+            Sections: %s
+            """.formatted(
+                title,
+                author,
+                style,
+                tableOfContents ? "Yes" : "No",
+                footer,
+                String.join(", ", sections)
+        );
+    }
 }
