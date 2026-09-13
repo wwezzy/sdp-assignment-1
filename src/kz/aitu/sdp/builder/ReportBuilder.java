@@ -43,11 +43,30 @@ public abstract class ReportBuilder {
     }
 
     public ReportBuilder addSection(String section) {
+        if(section == null || section.isBlank()) {
+            throw new IllegalArgumentException("Section must not be blank");
+        }
         this.sections.add(section);
         return this;
     }
 
+    private void validate() {
+        if (title == null || title.isBlank()) {
+            throw new IllegalStateException("Title must not be blank");
+        }
+        if (author == null || author.isBlank()) {
+            throw new IllegalStateException("Author must not be blank");
+        }
+        if (footer == null || footer.isBlank()) {
+            throw new IllegalStateException("Footer must not be blank");
+        }
+        if (sections.isEmpty()) {
+            throw new IllegalStateException("Report must contain at least one section");
+        }
+    }
+
     public Report build() {
+        validate();
         return new Report(
                 title,
                 author,
